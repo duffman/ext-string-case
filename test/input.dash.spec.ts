@@ -12,9 +12,9 @@
  your head when it comes to converting strings from
  snake_casing to or from PascalCasing!
 
- String Helper for converting to and from Pascal, Snake and Kebab
- casing, also contains helper methods for determining upper and lower
- case as well as lower and upper casing
+ String Helper for converting to and from Pascal, Snake, Dash adn
+ Camel casing, also contains helper methods for determining upper
+ and lower case as well as lower and upper casing
 
  Use this software free of charge, the only thing I ask is that
  you obey to the terms stated in the license, i would also like
@@ -33,12 +33,38 @@ import { expect } from "chai";
 import "mocha";
 import { ExtStringCase } from "../src/ext-string-case";
 
-describe('pascalToDashCase: Pascal to Dash case conversion', () => {
-	let input = "WelcomeToTheJungle";
-	let result = ExtStringCase.pascalToDashCase(input);
+// Snake
 
-	it('Should be Dash cased', () => {
-		const expected = "welcome-to-the-jungle";
+describe('dashToPascalCase: Dash to Pascal case', () => {
+	let input = "use-your-illusion";
+	let result = ExtStringCase.dashToPascalCase(input);
+
+	it('Should be Pascal cased', () => {
+		const expected = "UseYourIllusion";
+		expect(result).to.equal(expected);
+	});
+});
+
+// Camel
+
+describe('dashToCamelCase: Dash to Camel case', () => {
+	let input = "use-your-illusion";
+	let result = ExtStringCase.dashToCamelCase(input);
+
+	it('Should be Camel cased', () => {
+		const expected = "useYourIllusion";
+		expect(result).to.equal(expected);
+	});
+});
+
+// Snake
+
+describe('dashToSnakeCase: Dash to Snake case', () => {
+	let input = "use-your-illusion";
+	let result = ExtStringCase.dashToSnakeCase(input);
+
+	it('Should be Snake cased', () => {
+		const expected = "use_your_illusion";
 		expect(result).to.equal(expected);
 	});
 });

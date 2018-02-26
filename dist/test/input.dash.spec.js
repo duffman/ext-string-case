@@ -13,9 +13,9 @@
  your head when it comes to converting strings from
  snake_casing to or from PascalCasing!
 
- String Helper for converting to and from Pascal, Snake and Kebab
- casing, also contains helper methods for determining upper and lower
- case as well as lower and upper casing
+ String Helper for converting to and from Pascal, Snake, Dash adn
+ Camel casing, also contains helper methods for determining upper
+ and lower case as well as lower and upper casing
 
  Use this software free of charge, the only thing I ask is that
  you obey to the terms stated in the license, i would also like
@@ -33,9 +33,28 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const chai_1 = require("chai");
 require("mocha");
 const ext_string_case_1 = require("../src/ext-string-case");
-describe('Pascal to Snake Case conversion', () => {
-    let input = "UseYourIllusion";
-    let result = ext_string_case_1.ExtStringCase.pascalToSnakeCase(input);
+// Snake
+describe('dashToPascalCase: Dash to Pascal case', () => {
+    let input = "use-your-illusion";
+    let result = ext_string_case_1.ExtStringCase.dashToPascalCase(input);
+    it('Should be Pascal cased', () => {
+        const expected = "UseYourIllusion";
+        chai_1.expect(result).to.equal(expected);
+    });
+});
+// Camel
+describe('dashToCamelCase: Dash to Camel case', () => {
+    let input = "use-your-illusion";
+    let result = ext_string_case_1.ExtStringCase.dashToCamelCase(input);
+    it('Should be Camel cased', () => {
+        const expected = "useYourIllusion";
+        chai_1.expect(result).to.equal(expected);
+    });
+});
+// Snake
+describe('dashToSnakeCase: Dash to Snake case', () => {
+    let input = "use-your-illusion";
+    let result = ext_string_case_1.ExtStringCase.dashToSnakeCase(input);
     it('Should be Snake cased', () => {
         const expected = "use_your_illusion";
         chai_1.expect(result).to.equal(expected);

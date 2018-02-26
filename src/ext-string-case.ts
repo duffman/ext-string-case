@@ -199,10 +199,38 @@ export class ExtStringCase {
 	}
 
 	/**
-	 * Converts a snake cased string to pascal casing
+	 * Base method for converting
 	 * @param data
-	 * @param lowerPascal
+	 * @param dashCase
 	 * @returns {string}
+	 */
+	public static convertFromPascalCasing(data: string, dashCase: boolean = false): string {
+		if (data.length < 3) { return data.toLowerCase(); }
+		let currChar = "";
+		let aheadChar = "";
+
+		let chunk = "";
+
+		for (let i = 0; i < data.length; i++) {
+			currChar = data[i];
+			aheadChar = data[i + 1];
+
+			if (i > 0 && ExtStringCase.isUpperCase(currChar)) {
+				chunk += dashCase ? "-" : "_";
+			}
+
+			chunk += currChar;
+		}
+
+		return chunk.toLowerCase();
+	}
+
+	/********** SNAKE ************************/
+
+	/**
+	 * Converts Snake to Pascal case
+	 * @param data - string to convert
+	 * @returns - converted string
 	 */
 	public static snakeToPascalCase(data: string, lowerPascal: boolean = false): string {
 		let currChar = "";
@@ -234,77 +262,115 @@ export class ExtStringCase {
 	}
 
 	/**
-	 * Base method for converting
-	 * @param data
-	 * @param dashCase
-	 * @returns {string}
+	 * Converts Snake to Camel case
+	 * @param data - string to convert
+	 * @returns - converted string
 	 */
-	public static convertFromPascalCasing(data: string, dashCase: boolean = false): string {
-		if (data.length < 3) { return data.toLowerCase(); }
-		let currChar = "";
-		let aheadChar = "";
-
-		let chunk = "";
-
-		for (let i = 0; i < data.length; i++) {
-			currChar = data[i];
-			aheadChar = data[i + 1];
-
-			if (i > 0 && ExtStringCase.isUpperCase(currChar)) {
-				chunk += dashCase ? "-" : "_";
-			}
-
-			chunk += currChar;
-		}
-
-		return chunk.toLowerCase();
+	public static snakeToCamelCase(data: string): string {
+		return ExtStringCase.snakeToPascalCase(data, true);
 	}
 
 	/**
-	 * Convert given string to Snake Casing
-	 * @param data
-	 * @returns {string}
+	 * Converts Snake to Dash case
+	 * @param data - string to convert
+	 * @returns - converted string
+	 */
+	public static snakeToDashCase(data: string): string {
+		return ExtStringCase.unifyString(data, "-");
+	}
+
+	/********** DASH ************************/
+
+	/**
+	 * Converts Dash to Pascal case
+	 * @param data - string to convert
+	 * @returns - converted string
+	 */
+	public static dashToPascalCase(data: string): string {
+		return ExtStringCase.invertCasing(data);
+	}
+
+	/**
+	 * Converts Dash to Camel case
+	 * @param data - string to convert
+	 * @returns - converted string
+	 */
+	public static dashToCamelCase(data: string): string {
+		return ExtStringCase.invertCasing(data, true);
+	}
+
+	/**
+	 * Converts Dash to Snake case
+	 * @param data - string to convert
+	 * @returns - converted string
+	 */
+	public static dashToSnakeCase(data: string): string {
+		return ExtStringCase.unifyString(data, "_");
+	}
+
+	/********** PASCAL **********************/
+
+	/**
+	 * Converts Pascal to Snake case
+	 * @param data - string to convert
+	 * @returns - converted string
 	 */
 	public static pascalToSnakeCase(data: string): string {
 		return ExtStringCase.convertFromPascalCasing(data);
 	}
 
 	/**
-	 * A very rudimentary way of detecting string casing
-	 * @param str
-	 */
-	private static detectCasing(str: string): StringCasing {
-		let result = StringCasing.None;
-
-		if (!ExtStringCase.validStr(str)) {
-			return result;
-		}
-
-		// Attempt to detect Pascal and Camel
-		if (ExtStringCase.onlyLetters(str) && ExtStringCase.haveUpperCaseChar(str)) {
-			if (ExtStringCase.isFirstUpper(str)) {
-				result = StringCasing.Pascal;
-			}
-			else {
-				result = StringCasing.Camel;
-			}
-		}
-
-		// Attempt to detect Dash
-
-
-		return result;
-	}
-
-	/**
-	 * Convert given string to Dash Casing
-	 * @param data
-	 * @returns {string}
+	 * Converts Pascal to Dash case
+	 * @param data - string to convert
+	 * @returns - converted string
 	 */
 	public static pascalToDashCase(data: string): string {
 		return ExtStringCase.convertFromPascalCasing(data, true);
 	}
 
+	/**
+	 * Converts Pascal to Camel case
+	 * @param data - string to convert
+	 * @returns - converted string
+	 */
+	public static pascalToCamelCase(data: string): string {
+		return ExtStringCase.lowerFirst(data);
+	}
+
+	/********** Camel **********************/
+
+	/**
+	 * Converts Camel to Pascal case
+	 * @param data - string to convert
+	 * @returns - converted string
+	 */
+	public static camelToPascalCase(data: string): string {
+		return ExtStringCase.upperFirst(data);
+	}
+
+	/**
+	 * Converts Camel to Snake case
+	 * @param data - string to convert
+	 * @returns - converted string
+	 */
+	public static camelToSnakeCase(data: string): string {
+		return ExtStringCase.convertFromPascalCasing(data);
+	}
+
+	/**
+	 * Converts Camel to Dash case
+	 * @param data - string to convert
+	 * @returns - converted string
+	 */
+	public static camelToDashCase(data: string): string {
+		return ExtStringCase.convertFromPascalCasing(data);
+	}
+
+	/**
+	 *
+	 * @param - string to convert
+	 * @returns - converted string
+	 */
 	public static toSnakeCase(data: string): string {
 		data = ExtStringCase.unifyString(data, "_");
 		return data.toLowerCase();
