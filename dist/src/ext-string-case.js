@@ -329,4 +329,4 @@ class ExtStringCase {
     }
 }
 exports.ExtStringCase = ExtStringCase;
-ExtStringCase.testExperimental("OneStringToRuleThemAll");
+// ExtStringCase.testExperimental("OneStringToRuleThemAll"); 
