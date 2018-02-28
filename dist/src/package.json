@@ -1,6 +1,6 @@
 {
   "name": "ext-string-case",
-  "version": "0.2.0",
+  "version": "0.2.2",
   "description": " String Utility for handling String casing conversion, detection",
   "main": "ext-string-case.js",
   "scripts": {

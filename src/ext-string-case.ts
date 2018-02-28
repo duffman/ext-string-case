@@ -52,7 +52,7 @@ export class ExtStringCase {
 	}
 
 	/**
-	 * Check wheter a string is assigned and has a length
+	 * Check whether a string is assigned and has a length
 	 * @param str
 	 * @returns {boolean}
 	 */
@@ -61,9 +61,9 @@ export class ExtStringCase {
 	}
 
 	/**
-	 * Determines if the given char is an ASCII Char
+	 * Determines if the given char is a letter
 	 * @param char - char to test
-	 * @returns {boolean}
+	 * @returns
 	 */
 	public static isLetter(char: string): boolean {
 		let firstChar = char.charAt(0).toUpperCase();
@@ -71,9 +71,9 @@ export class ExtStringCase {
 	}
 
 	/**
-	 * Tests if a given string contains only letters
-	 * @param str
-	 * @returns {boolean}
+	 * Determines if a given string contains only letters
+	 * @param str - string to
+	 * @returns - wether a string is only letterrs
 	 */
 	public static onlyLetters(str: string): boolean {
 		return (/^[a-zA-Z]+$/.test(str));
@@ -82,7 +82,7 @@ export class ExtStringCase {
 	/**
 	 * Returns the given string with first letter in upper case
 	 * @param str - input string
-	 * @returns {string}
+	 * @returns - the resulting string
 	 */
 	public static upperFirst(str: string) {
 		return str.charAt(0).toUpperCase() + str.slice(1);
@@ -91,7 +91,7 @@ export class ExtStringCase {
 	/**
 	 * Returns the given string with first letter in lower case
 	 * @param str - input string
-	 * @returns {string}
+	 * @returns - resulting string
 	 */
 	public static lowerFirst(str: string) {
 		return str.charAt(0).toLowerCase() + str.slice(1);
@@ -108,7 +108,8 @@ export class ExtStringCase {
 
 	/**
 	 * Detects if the first char of a given string is upper case
-	 * @param str
+	 * @param str - input string
+	 * @returns {boolean}
 	 */
 	public static isFirstLower(str: string): boolean {
 		if (!ExtStringCase.validStr(str)) return false;
@@ -118,7 +119,7 @@ export class ExtStringCase {
 	/**
 	 * Determines if the given string is in lower case
 	 * @param str - the string to test
-	 * @returns {boolean}
+	 * @returns - {boolean}
 	 */
 	public static isLowerCase(str: string): boolean {
 		return !ExtStringCase.isUpperCase(str);
@@ -134,8 +135,9 @@ export class ExtStringCase {
 	}
 
 	/**
-	 * Helper method for the Pascal/Camel Casing identification
+	 * Checks whether a string contains an upper case
 	 * @param str
+	 * @returns {boolean}
 	 */
 	public static haveUpperCaseChar(str: string): boolean {
 		let char: string = "";
@@ -152,10 +154,10 @@ export class ExtStringCase {
 	}
 
 	/**
-	 * Semi-smart method to convert snake to pascal
+	 * Semi-smart method to convert to and from Snake/Cane and Pascal casing
 	 * and the other way around
-	 * @param data
-	 * @param toLowerPascal
+	 * @param data - input string
+	 * @param toLowerPascal - if set the result will be camel case
 	 */
 	public static invertCasing(data: string, toLowerPascal: boolean = false) {
 		if (data.indexOf("_") > -1 || data.indexOf("-") > -1) {
@@ -167,10 +169,16 @@ export class ExtStringCase {
 	}
 
 	/**
+	 * Processes a given string and replaces char which is not a valid letter with
+	 * a given replacement char, only one fill char after an other will be included
 	 *
-	 * @param data
-	 * @param fillChar - replace char for
-	 * @returns {string}
+	 *   Example with "-" as fill char:
+	 *   Input: "#You___Could___  --> Be <-- Mine!!"
+	 *   Output: "You-Could-Be-Mine
+	 *
+	 * @param data - input string
+	 * @param fillChar -
+	 * @returns - resulting string
 	 */
 	public static unifyString(data: string, fillChar: string = "_", stripNoneLetters: boolean = false): string {
 		let prevChar: string = "";
@@ -199,10 +207,10 @@ export class ExtStringCase {
 	}
 
 	/**
-	 * Base method for converting
-	 * @param data
-	 * @param dashCase
-	 * @returns {string}
+	 * Base method for converting from pascal to snake/dash case
+	 * @param data - input
+	 * @param dashCase - if set output will be dash case
+	 * @returns - resulting string
 	 */
 	public static convertFromPascalCasing(data: string, dashCase: boolean = false): string {
 		if (data.length < 3) { return data.toLowerCase(); }
@@ -224,8 +232,6 @@ export class ExtStringCase {
 
 		return chunk.toLowerCase();
 	}
-
-	/********** SNAKE ************************/
 
 	/**
 	 * Converts Snake to Pascal case
@@ -279,8 +285,6 @@ export class ExtStringCase {
 		return ExtStringCase.unifyString(data, "-");
 	}
 
-	/********** DASH ************************/
-
 	/**
 	 * Converts Dash to Pascal case
 	 * @param data - string to convert
@@ -308,8 +312,6 @@ export class ExtStringCase {
 		return ExtStringCase.unifyString(data, "_");
 	}
 
-	/********** PASCAL **********************/
-
 	/**
 	 * Converts Pascal to Snake case
 	 * @param data - string to convert
@@ -336,8 +338,6 @@ export class ExtStringCase {
 	public static pascalToCamelCase(data: string): string {
 		return ExtStringCase.lowerFirst(data);
 	}
-
-	/********** Camel **********************/
 
 	/**
 	 * Converts Camel to Pascal case
