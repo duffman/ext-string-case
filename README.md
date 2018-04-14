@@ -17,7 +17,7 @@ there are also a bunch convenience/helper methods for dealing with strings.
 
 ### Examples
 
-##### Pascal case
+##### Snake case
 
 ```typescript
 
